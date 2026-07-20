@@ -60,12 +60,12 @@
       </ul>
     {% endif %}
 
-    {% if paginator and paginator.number_pages > 1 %}
+    {% if paginator and paginator.number_pagers > 1 %}
     <div class="board-body pager">
       {% if paginator.previous %}
         <a class="text-link" href="{{ paginator.previous }}">← Newer</a>
       {% endif %}
-      <span class="muted">{{ paginator.current_index }} / {{ paginator.number_pages }}</span>
+      <span class="muted">{{ paginator.current_index }} / {{ paginator.number_pagers }}</span>
       {% if paginator.next %}
         <a class="text-link" href="{{ paginator.next }}">Older →</a>
       {% endif %}
