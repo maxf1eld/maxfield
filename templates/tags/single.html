@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ term.name }} · {{ config.title }}{% endblock title %}
+
+{% block content %}
+<div class="board">
+  <div class="board-head">
+    <h1>#{{ term.name }}</h1>
+    <span class="muted">{{ term.pages | length }}</span>
+  </div>
+  {% if term.pages %}
+  <ul class="post-list">
+    {% for page in term.pages %}
+    <li>
+      {% if page.date %}
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
+      {% else %}
+        <time></time>
+      {% endif %}
+      <a href="{{ page.permalink }}">{{ page.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="board-body empty">No posts.</div>
+  {% endif %}
+</div>
+{% endblock content %}

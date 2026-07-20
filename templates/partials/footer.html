@@ -1,0 +1,26 @@
+<footer class="site-footer">
+  <div class="footer-row">
+    <p>{{ config.title }}</p>
+    <div class="social">
+      {% if config.extra.github %}
+        <a href="{{ config.extra.github }}" rel="me noopener">GitHub</a>
+      {% endif %}
+      {% if config.extra.email %}
+        <a href="mailto:{{ config.extra.email }}">Email</a>
+      {% endif %}
+      {% if config.extra.telegram %}
+        <a href="{{ config.extra.telegram }}" rel="me noopener">Telegram</a>
+      {% endif %}
+      {% if config.extra.x %}
+        <a href="{{ config.extra.x }}" rel="me noopener">X</a>
+      {% endif %}
+      {% if config.extra.mastodon %}
+        <a href="{{ config.extra.mastodon }}" rel="me noopener">Mastodon</a>
+      {% endif %}
+      {% if config.extra.bluesky %}
+        <a href="{{ config.extra.bluesky }}" rel="me noopener">Bluesky</a>
+      {% endif %}
+      <a href="{{ get_url(path='atom.xml') }}">Feed</a>
+    </div>
+  </div>
+</footer>

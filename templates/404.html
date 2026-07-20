@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Not found · {{ config.title }}{% endblock title %}
+
+{% block content %}
+<div class="board">
+  <div class="board-head"><h1>Not found</h1></div>
+  <div class="not-found">
+    <p class="code">404</p>
+    <p>This page does not exist.</p>
+    <a class="btn" href="{{ get_url(path='@/_index.md') }}">Home</a>
+  </div>
+</div>
+{% endblock content %}

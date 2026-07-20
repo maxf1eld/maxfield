@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+  {% if config.description %}
+  <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
+  {% endif %}
+  <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+  <link rel="stylesheet" href="{{ get_url(path='giallo.css') }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') }}">
+  <meta name="color-scheme" content="dark">
+  {% block head %}{% endblock head %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="shell">
+    {% include "partials/header.html" %}
+
+    <main id="main">
+      {% block content %}{% endblock content %}
+    </main>
+
+    {% include "partials/footer.html" %}
+  </div>
+</body>
+</html>

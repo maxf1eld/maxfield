@@ -1,0 +1,12 @@
+{% set path = current_path | default(value="") %}
+<header class="site-header">
+  <a class="brand" href="{{ get_url(path='@/_index.md') }}">
+    <span class="name">{{ config.title }}</span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="{{ get_url(path='@/_index.md') }}" {% if path == "/" %}aria-current="page"{% endif %}>Home</a>
+    <a href="{{ get_url(path='@/blog/_index.md') }}" {% if path is starting_with("/blog") %}aria-current="page"{% endif %}>Blog</a>
+    <a href="{{ get_url(path='@/projects/_index.md') }}" {% if path is starting_with("/projects") %}aria-current="page"{% endif %}>Projects</a>
+    <a href="{{ get_url(path='@/about.md') }}" {% if path is starting_with("/about") %}aria-current="page"{% endif %}>About</a>
+  </nav>
+</header>
