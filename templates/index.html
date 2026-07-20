@@ -4,20 +4,6 @@
 {% set blog = get_section(path="blog/_index.md") %}
 {% set projects = get_section(path="projects/_index.md") %}
 
-<section class="hero">
-  <div class="hero-inner">
-    <h1 class="title">{{ config.title }}</h1>
-    {% if config.description %}
-      <p class="sub">{{ config.description }}</p>
-    {% endif %}
-    <div class="hero-links">
-      <a class="btn" href="{{ get_url(path='@/blog/_index.md') }}">Blog</a>
-      <a class="btn" href="{{ get_url(path='@/projects/_index.md') }}">Projects</a>
-      <a class="btn" href="{{ get_url(path='@/about.md') }}">About</a>
-    </div>
-  </div>
-</section>
-
 <div class="board">
   <div class="board-head">
     <h2>Blog</h2>
@@ -34,10 +20,14 @@
       {% else %}
         <time></time>
       {% endif %}
-      <a href="{{ page.permalink }}">{{ page.title }}</a>
-      {% if page.summary %}
-        <p class="summary">{{ page.summary | striptags | truncate(length=140) }}</p>
-      {% endif %}
+      <div class="post-main">
+        <a href="{{ page.permalink }}">{{ page.title }}</a>
+        {% if page.description %}
+          <p class="summary">{{ page.description }}</p>
+        {% elif page.summary %}
+          <p class="summary">{{ page.summary | striptags | truncate(length=140) }}</p>
+        {% endif %}
+      </div>
     </li>
     {% endfor %}
   </ul>
