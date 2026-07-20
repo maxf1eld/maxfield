@@ -190,6 +190,16 @@ a:hover {
   letter-spacing: 0.06em;
 }
 
+.board-body.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--panel-edge);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
 /* lists */
 .post-list {
   list-style: none;

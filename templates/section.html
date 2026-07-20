@@ -3,6 +3,13 @@
 {% block title %}{{ section.title }} · {{ config.title }}{% endblock title %}
 
 {% block content %}
+{# Paginated sections put items on paginator.pages, not section.pages #}
+{% if paginator %}
+  {% set pages = paginator.pages %}
+{% else %}
+  {% set pages = section.pages %}
+{% endif %}
+
 <div class="board">
   <div class="board-head page-header">
     <h1>{{ section.title }}</h1>
@@ -14,10 +21,10 @@
   </div>
   {% endif %}
 
-  {% if section.pages %}
+  {% if pages %}
     {% if section.path is starting_with("/projects") %}
       <div class="card-grid">
-        {% for page in section.pages %}
+        {% for page in pages %}
         <article class="card">
           <h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
           {% if page.description %}
@@ -33,22 +40,36 @@
       </div>
     {% else %}
       <ul class="post-list">
-        {% for page in section.pages %}
+        {% for page in pages %}
         <li>
           {% if page.date %}
             <time datetime="{{ page.date }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
           {% else %}
             <time></time>
           {% endif %}
-          <a href="{{ page.permalink }}">{{ page.title }}</a>
-          {% if page.summary %}
-            <p class="summary">{{ page.summary | striptags | truncate(length=160) }}</p>
-          {% elif page.description %}
-            <p class="summary">{{ page.description }}</p>
-          {% endif %}
+          <div class="post-main">
+            <a href="{{ page.permalink }}">{{ page.title }}</a>
+            {% if page.description %}
+              <p class="summary">{{ page.description }}</p>
+            {% elif page.summary %}
+              <p class="summary">{{ page.summary | striptags | truncate(length=160) }}</p>
+            {% endif %}
+          </div>
         </li>
         {% endfor %}
       </ul>
+    {% endif %}
+
+    {% if paginator and paginator.number_pages > 1 %}
+    <div class="board-body pager">
+      {% if paginator.previous %}
+        <a class="text-link" href="{{ paginator.previous }}">← Newer</a>
+      {% endif %}
+      <span class="muted">{{ paginator.current_index }} / {{ paginator.number_pages }}</span>
+      {% if paginator.next %}
+        <a class="text-link" href="{{ paginator.next }}">Older →</a>
+      {% endif %}
+    </div>
     {% endif %}
   {% else %}
     <div class="board-body empty">Nothing here yet.</div>
